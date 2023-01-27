@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from "./Card";
 import styled from 'styled-components';
 import { filterCards, orderCards, reset } from "../redux/actions";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Contenedor = styled.div`
   background-color:rgb(56, 120, 80);
@@ -16,7 +16,7 @@ const Contenedor = styled.div`
 const  Favorites=()=>{
 
 const dispatch = useDispatch();
-const { myFavorites } = useSelector(state => state);
+const { myFavorites } = useSelector(state => state); // como ya se que el estado global en un ibj hago entre llaves 
 
 const handleOrder = (event)=>{
     dispatch(orderCards(event.target.value))
@@ -51,21 +51,29 @@ return(
                   <button onClick={()=>dispatch(reset)}>RESET</button>
                </div>
 
-         {
-         myFavorites.map(props =>{
-            return (
-               
-             <Card
+         { 
+         myFavorites.map(props => { // recorro cada personaje
+            return ( // copio abajo lo mismo que tengo en card
+              <div>
+               <Link to={`/detail/${props.id}`}>
+                  <h2>{props.name}</h2>
+                  <h3>{props.id}</h3>
+                  <h3>{props.species}</h3>
+                  <h3>{props.gender}</h3>
+                  <img src={props.image} alt={props.image} />
+               </Link>
+            </div>
+            //  <Card
              
-                key={props.id}
-               id={props.id}
-               name={props.name}
-               species={props.species}
-               gender={props.gender} 
-               image={props.image}
-            //    onClose={onClose}
-               // onClose={() => window.alert('Esmulamos que se cierra la card')}
-            />   
+            //     key={props.id}
+            //    id={props.id}
+            //    name={props.name}
+            //    species={props.species}
+            //    gender={props.gender} 
+            //    image={props.image}
+            // //    onClose={onClose}
+            //    // onClose={() => window.alert('Esmulamos que se cierra la card')}
+            // />   
             
 
             );  

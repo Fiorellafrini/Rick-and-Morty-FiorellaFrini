@@ -1,28 +1,29 @@
 import { ADD_PERSONAJE, DELETE_PERSONAJE, FILTER, ORDER, RESET } from './actions_type'
 
 const initialState={
-    myFavorites:[],
+    myFavorites: [],
     allFavorites:[],
 }
 
-const rootReducer = (state=initialState, action)=>{
+const rootReducer = (state = initialState, action)=>{
     switch(action.type){
         case ADD_PERSONAJE:
             return {
-                myFavorites:[...state.myFavorites, action.payload],
-                myFavoritesCopy: [...state.myFavorites, action.payload]
+                ...state,
+                myFavorites:[...state.myFavorites, action.payload]
+                // myFavoritesCopy: [...state.myFavorites, action.payload]
             }
         case DELETE_PERSONAJE:
             return {
                 ...state,
-                myFavorites: state.myFavorites.map((char) => char.id !== action.payload)
+                myFavorites: state.myFavorites.filter(char => char.id !== action.payload) // filtro todos los personajes y me quedo con el que es igual al que quiero eliminar y lo elimino
             }
 
             
         case FILTER:
             return {
                 ...state,
-                myFavorites: state.allCharacters.filter((char) => char.gender === action.payload)
+                myFavorites: state.allCharacters.filter(char => char.gender === action.payload)
             }
         case ORDER:
             const orderCopy = [...state.allFavorites];

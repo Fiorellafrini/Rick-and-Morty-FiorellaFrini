@@ -77,7 +77,7 @@ const Rick = styled.div`
    
    const dispatch = useDispatch(); // despacha actions
    
-   const {myFavorites} = useSelector((state)=>state); // para traer el stado y conectarlo
+   const myFavorites = useSelector(state=>state.myFavorites); // del estado globar quiero traer myfavorites
 
    const handleFavorite = () => {
       if(isFav){ // si es true
@@ -106,9 +106,9 @@ const Rick = styled.div`
     <Rick>
       <div className={styled.card}>  
        {
-         isFav ? (
-         <button onClick={handleFavorite}>❤️</button> ) : (
-         <button onClick={handleFavorite}>🤍</button>)}
+         isFav ? ( // si es true va a ejecutar el boton handlefavorite
+         <button onClick={handleFavorite}>❤️</button> ) : ( // si no, me muestro el otro boton
+         <button onClick={handleFavorite}>🤍</button>)} 
    
 
          {/* <button onClick={()=>{props.onClose(props)}}>X</button> */}
