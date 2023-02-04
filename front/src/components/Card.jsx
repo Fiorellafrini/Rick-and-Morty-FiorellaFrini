@@ -20,7 +20,7 @@ const Rick = styled.div`
    margin-top: 8px;
    margin-left: 8px;
    margin-bottom: 8px;
-   display:flex;
+   display: flow-root;
    font-size: 15px;
    background-image: -webkit-linear-gradient(top,  #302d2f, #6fff91);
    background-image: -moz-linear-gradient(top, #302d2f, #6fff91);
@@ -28,6 +28,11 @@ const Rick = styled.div`
    background-image: -o-linear-gradient(top,  #302d2f, #6fff91);
    background-image: linear-gradient(to bottom,  #302d2f, #6fff91);
  
+&:hover {
+   background-color: #5208c1;
+}
+
+
  }
 
 
@@ -48,22 +53,26 @@ const Rick = styled.div`
    background-image: url ('https://rickandmortyapi.com/api/character/avatar/1.jpeg');
    background-size: cover; 
    border-radius: 50%; 
+
    
  }
   
- /* :hover { */
+  &:hover { 
   
-   /* img{
+   img{ 
       transition-property: 5s;
       border-radius: 250px;
       filter: drop-shadow(2);
       border:ridge 10px;
       border-color: #347f726d;
       color:  #0c1715;
-      
+
    }
-      /* filter: drop-shadow(1); */
-      /* border:solid 5px;
+  
+}
+   /* } */
+      /* filter: drop-shadow(1);
+       border:solid 5px;
       color: #0c1715; 
       border-color: #347f72;  
          

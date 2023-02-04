@@ -10,21 +10,39 @@ const rootReducer = (state = initialState, action)=>{
         case ADD_PERSONAJE:
             return {
                 ...state,
-                myFavorites:[...state.myFavorites, action.payload]
-                // myFavoritesCopy: [...state.myFavorites, action.payload]
+                // myFavorites:[...state.myFavorites, action.payload],
+                myFavorites:[...state.allFavorites, action.payload],
+                allFavorites: [...state.myFavorites, action.payload]
             }
         case DELETE_PERSONAJE:
+            // return {
+            //     ...state,
+            //     myFavorites: state.myFavorites.filter(char => char.id !== action.payload) // filtro todos los personajes y me quedo con el que es igual al que quiero eliminar y lo elimino
+            // }
+            const filtered = state.myFavorites.filter(character=>{
+                return character.id !== action.payload
+            });
+            return{
+                ...state,
+                myFavorites: filtered,
+                allCharacters: filtered,
+            }
+         
+            
+
+        case FILTER:
+            // return {
+            //     ...state,
+            //     myFavorites: state.allCharacters.filter(char => char.gender === action.payload)
+            // }
+
+            const filterCopy = [...state.allFavorites];
+            const filter = filterCopy.filter(character => character.gender === action.payload);
             return {
                 ...state,
-                myFavorites: state.myFavorites.filter(char => char.id !== action.payload) // filtro todos los personajes y me quedo con el que es igual al que quiero eliminar y lo elimino
+                myFavorites:filter,
             }
 
-            
-        case FILTER:
-            return {
-                ...state,
-                myFavorites: state.allCharacters.filter(char => char.gender === action.payload)
-            }
         case ORDER:
             const orderCopy = [...state.allFavorites];
             const order = orderCopy.sort((a, b)=> {
@@ -45,6 +63,7 @@ const rootReducer = (state = initialState, action)=>{
                 ...state,
                 myFavorites: [...state.allFavorites]
             }
+          
     
         default :
              return{...state}

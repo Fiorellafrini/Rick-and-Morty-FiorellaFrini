@@ -57,7 +57,7 @@ export default function Form({login}) {
             {errors.password && <p style={{color: 'red'}} >{errors.password}</p>}
 
             
-            <button>Log In</button>
+            <button>Log In ✔</button>
         
         </form>
     </div>

@@ -37,8 +37,8 @@ useEffect(() => {
 
 
  const onSearch = (character) => {
-   //  fetch(`http://localhost:3001/rickandmorty/character/${character}`)
-   fetch(`https://rickandmortyapi.com/api/character/${character}`) 
+    fetch(`http://localhost:3001/rickandmorty/character/${character}`)
+   // fetch(`https://rickandmortyapi.com/api/character/${character}`) 
    // fetch es una Fn que hace una peticion a un servidor(la url)
       .then((response) => response.json()) // .then(response) es la respuesta, el plan de accion. response.json es la respuesta que saca de json
       .then((data) => { 

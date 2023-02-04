@@ -19,7 +19,9 @@ button{
    column-width:100% ;
    background-color: #39ac43;
    margin-left: 8px;
-   
+&:hover {
+   background-color: #5208c1;
+}
 
 }
 `;
@@ -38,11 +40,11 @@ export default function SearchBar({ onSearch }) {
       <Buscar>
       <div className={styled.SearchBar}>
       
-      <Link to='/about'><button>About</button></Link>
+      <Link to='/about'><button>🌎About</button></Link>
 
-      <Link to='/favorites'><button>Favorites</button></Link>
+      <Link to='/favorites'><button>❤Favorites</button></Link>
 
-      <Link to='/home'><button>Home</button></Link>
+      <Link to='/home'><button>🏡Home</button></Link>
 
       <input type='search' value={character} onChange={handleChange} />
          {/*z <input type='search' onChange={handleChange} />  */}

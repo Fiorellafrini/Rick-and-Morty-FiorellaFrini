@@ -12,8 +12,8 @@ const [character, setCharacter]= useState({}) //Es el valor inicial, para trabaj
 
 
 useEffect(() => { // para trabajarlos ciclos de vida del componente funcional
-  fetch(`https://rickandmortyapi.com/api/character/${detailId}`) 
-  // fetch(`http://localhost:3001/rickandmorty/detail/${detailId}`)
+  // fetch(`https://rickandmortyapi.com/api/character/${detailId}`) 
+  fetch(`http://localhost:3001/rickandmorty/detail/${detailId}`) // asi se concecta en back con el front, el front le pide al 3001
       .then((response) => response.json())
       .then((char) => {
         if (char.name) {

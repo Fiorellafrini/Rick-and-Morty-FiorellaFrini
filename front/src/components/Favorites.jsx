@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import Card from "./Card";
+// import Card from "./Card";
 import styled from 'styled-components';
 import { filterCards, orderCards, reset } from "../redux/actions";
 import { Link } from "react-router-dom";
@@ -23,7 +23,8 @@ const handleOrder = (event)=>{
 }
 
 const handleFilter = (event)=>{
-    dispatch(filterCards(event.target.value))
+   const { name, value } = event.target;
+    dispatch(filterCards(value))
 }
 
 
@@ -48,13 +49,14 @@ return(
                   </select>
                </div>
                <div>
-                  <button onClick={()=>dispatch(reset)}>RESET</button>
+                  {/* <button onClick={()=>dispatch(reset)}>RESET</button> */}
                </div>
-
          { 
          myFavorites.map(props => { // recorro cada personaje
             return ( // copio abajo lo mismo que tengo en card
               <div>
+
+         {/* <button onClick={props.onClose}>X</button> */}
                <Link to={`/detail/${props.id}`}>
                   <h2>{props.name}</h2>
                   <h3>{props.id}</h3>
@@ -63,25 +65,10 @@ return(
                   <img src={props.image} alt={props.image} />
                </Link>
             </div>
-            //  <Card
-             
-            //     key={props.id}
-            //    id={props.id}
-            //    name={props.name}
-            //    species={props.species}
-            //    gender={props.gender} 
-            //    image={props.image}
-            // //    onClose={onClose}
-            //    // onClose={() => window.alert('Esmulamos que se cierra la card')}
-            // />   
-            
-
-            );  
-          
+            )  
          })
         } 
       </div>
-      
     </Contenedor>
     )
  }
