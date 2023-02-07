@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 // import Card from "./Card";
 import styled from 'styled-components';
-import { filterCards, orderCards, reset } from "../redux/actions";
+import { getFavorites, cleanFavorites, filterCards, orderCards, reset } from "../redux/actions";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Contenedor = styled.div`
   background-color:rgb(56, 120, 80);
@@ -21,6 +22,12 @@ const { myFavorites } = useSelector(state => state); // como ya se que el estado
 const handleOrder = (event)=>{
     dispatch(orderCards(event.target.value))
 }
+
+useEffect(()=>{
+   dispatch(cleanFavorites())
+   dispatch(getFavorites())
+},
+[]) 
 
 const handleFilter = (event)=>{
    const { name, value } = event.target;
