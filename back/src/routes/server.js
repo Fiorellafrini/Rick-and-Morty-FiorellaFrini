@@ -28,9 +28,22 @@ const express = require ('express');
 const app= express();
 const axios = require('axios') // uso axios pq hago la llamada a la api
 const cors = require('cors');
+const getAllChars = require('../controllers/getAllChars')
+
 
 app.use(cors());
 app.use(express.json());
+
+app.get('/rickandmorty/allCharacters', async (req, res) => {
+    try {
+        const allCharacters = await getAllChars();
+        res.status(200).json(allCharacters);
+   
+    } catch (error) {
+        res.status(404).send('Hubo un problema')
+        
+    }
+})
 
 
     app.get('/rickandmorty/character/:id', async (req,res) => {
