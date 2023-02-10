@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Character } = require('../models/Character');
+const { Character } = require('../DB_connection');
 
 
 const getApiData = async () => { // TODO ESTO ES UN CONTROLADOR , no ruta
@@ -47,7 +47,9 @@ const getApiData = async () => { // TODO ESTO ES UN CONTROLADOR , no ruta
 const saveApiData = async () => {
     try {
         const allCharacters = await getApiData();
-        const createCharacters = await  Character.bullCreate(allCharacters) // ese Character es el modelo
+        await Character.bulkCreate(allCharacters) // ese Character es el modelo
+
+        return allCharacters
 
     } catch (error) {
         return {error: error.message}
