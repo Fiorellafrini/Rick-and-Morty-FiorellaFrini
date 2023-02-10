@@ -29,7 +29,8 @@ const app= express();
 const axios = require('axios') // uso axios pq hago la llamada a la api
 const cors = require('cors');
 const getAllChars = require('../controllers/getAllChars')
-
+const postFav = require('../controllers/postFav');
+const Character = require('../models/Character');
 
 app.use(cors());
 app.use(express.json());
@@ -86,16 +87,24 @@ app.get('/rickandmorty/detail/:detailId', async (req, res) =>{
         res.status(404).send(error.message);
     }
 })
-let fav = []
+
+// let fav = []
 
 app.get('/rickandmorty/fav', (req, res)=>{
     res.status(200).json(fav)
 })
 
-app.post('/rickandmorty/fav', (req,res) =>{
-    fav.push(req.body);
+app.post('/rickandmorty/fav', async (req,res) =>{
+    try {
+        const characterFav = await postFav(req.body);
+   
+        if(characterFav.error) throw new Error (characterFav.error)
 
-    res.status(200).send('Se guardaron correctamente')
+        res.status(200).json(characterFav)
+    
+    } catch (error){
+        res.status(404).send(error.message)
+    }
 })
 
 app.delete('/rickandmorty/fav/:id', (req,res)=>{
