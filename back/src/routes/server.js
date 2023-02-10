@@ -30,7 +30,11 @@ const axios = require('axios') // uso axios pq hago la llamada a la api
 const cors = require('cors');
 const getAllChars = require('../controllers/getAllChars')
 const postFav = require('../controllers/postFav');
-const Character = require('../models/Character');
+// const Character = require('../models/Character');
+const getAllFavorites = require('../controllers/getAllFavorites');
+const deleteFavoriteById = require('../controllers/deleteFavoriteById');
+
+
 
 app.use(cors());
 app.use(express.json());
@@ -64,7 +68,7 @@ app.get('/rickandmorty/allCharacters', async (req, res) => {
         res.status(200).json(infoCharacter)
 
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(404).send(error.message);
     }
 })
 
@@ -90,12 +94,31 @@ app.get('/rickandmorty/detail/:detailId', async (req, res) =>{
 
 // let fav = []
 
-app.get('/rickandmorty/fav', (req, res)=>{
-    res.status(200).json(fav)
+// app.get('/rickandmorty/fav', (req, res)=>{
+//     res.status(200).json(fav)
+// })
+
+app.get('/rickandmorty/fav', async (req, res) => {
+    try {
+        const allFavorites = await getAllFavorites();
+
+        if(allFavorites.error) throw new Error(allFavorites.error);
+
+        return res.status(200).json(allFavorites);
+    } catch (error) {
+        return res.status(404).send(error.message)
+    }
 })
 
+
+
+
+
+
 app.post('/rickandmorty/fav', async (req,res) =>{
-    try {
+
+
+        try {
         const characterFav = await postFav(req.body);
    
         if(characterFav.error) throw new Error (characterFav.error)
@@ -107,16 +130,17 @@ app.post('/rickandmorty/fav', async (req,res) =>{
     }
 })
 
-app.delete('/rickandmorty/fav/:id', (req,res)=>{
-    const {id} = req.params;
+app.delete('/rickandmorty/fav/:id', async (req, res) => {    
+    try {
+        const { id } = req.params;;
+        const deleteFavorite = await deleteFavoriteById(parseInt(id));
 
-    const favFiltered = fav.filter(char => char.id !== parseInt(id));
-    fav = favFiltered;
-
-    res.status(200).send('Se elimino correctamente')
-
+        if(deleteFavorite.error) throw new Error(deleteFavorite.error)
+    
+        return res.status(200).send(deleteFavorite);
+    } catch (error) {
+        return res.status(404).send(error.message);
+    }
 })
-
-
 
 module.exports= app;
