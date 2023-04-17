@@ -42,22 +42,6 @@ return (
 </div>
 
 
-
-
-
-
-
-
-
-  //  <div>
-  //    <h1>Name:{character.name}</h1>
-  //    <h3>Status:{character.status}</h3>
-  //    <h3>Specie:{character.species}</h3>
-  //    <h3>Gender:{character.gender}</h3>
-  //    <h3>{character.origin?.Name}</h3>
-  //    <img src={character.image} alt={character.name} />
-  //  </div>
-
 )
 }
 export default Detail;

@@ -1,25 +1,23 @@
-
-
 const Validate = (userData) => {
- let errors = {}
-//  creo un obj vacio llamado error que si tiene errores lo lleno de propiedades, si no tiene nada lo retorno vacio
-if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.username)){
+  let errors = {};
+  //  creo un obj vacio llamado error que si tiene errores lo lleno de propiedades, si no tiene nada lo retorno vacio
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.username)) {
     errors.username = "El email es inválido";
-}
-if(!userData.username){
+  }
+  if (!userData.username) {
     errors.username = "Este campo no puede estar vacío";
-}
-if(userData.username.length > 35){
+  }
+  if (userData.username.length > 35) {
     errors.username = "El email no puede superar los 35 caracteres";
-}
-if(!userData.password.match(/\d/)){
+  }
+  if (!userData.password.match(/\d/)) {
     errors.password = "La contraseña debe contener al menos un número";
-}
-if(userData.password.length < 6 || userData.password.length > 10){
+  }
+  if (userData.password.length < 6 || userData.password.length > 10) {
     errors.password = "La contraseña debe contener entre 6 y 10 caracteres";
-}
+  }
 
-return errors;
-}
+  return errors;
+};
 
 export default Validate;
